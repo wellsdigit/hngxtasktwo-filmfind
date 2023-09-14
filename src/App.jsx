@@ -14,7 +14,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/hngxtasktwo-filmfind" element={<Moviespage />}/>
-          <Route path="/movie/:id" element={<MovieDetailPage/>}/>
+          <Route path="/hngxtasktwo-filmfind/movie/:id" element={<MovieDetailPage/>}/>
         </Routes>
       </BrowserRouter>
     </>

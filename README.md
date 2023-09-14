@@ -7,8 +7,6 @@ Currently, two official plugins are available:
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-- Creating comprehensive documentation for your movie discovery web application is crucial for guiding users, developers, and contributors. Below, I'll provide you with an outline for the documentation, along with descriptions of each section that you can expand upon:
-
 ---
 
 # MovieBox - Documentation

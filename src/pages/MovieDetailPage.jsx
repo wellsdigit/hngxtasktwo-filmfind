@@ -4,16 +4,20 @@ import fruit from './../assets/fruit.png';
 import axios from 'axios';
 import { useState,useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { Circles } from  'react-loader-spinner'
+
 
 const API_URL = 'https://api.themoviedb.org/3/movie';
 const API_KEY = '08004a5babd38a393e515f06876a45d6';
 
 const MovieDetailPage = () => {
     const [movie, setMovie] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     // Fetch movie details based on the ID
     const { id } = useParams();    // Extract movie ID from the URL parameter
     const fetchMovieDetails = async () => {
+        setLoading(true);
         try {
           const response = await axios.get(
             `${API_URL}/${id}`,
@@ -25,7 +29,7 @@ const MovieDetailPage = () => {
           );
   
           setMovie(response.data);
-          console.log(response.data)
+          setLoading(false);
         } catch (error) {
           console.error('Error fetching data:', error);
         }
@@ -50,8 +54,16 @@ const MovieDetailPage = () => {
 
 
     return(
-        <div style={backgroundStyle}>
-            {movie && <div className=" py-4 container max-w-[90%] min-w-[80%] md:max-w-[70%] lg:min-w-[45%] lg:max-w-[45%] mx-auto flex flex-col justify-center items-center w-full h-screen">
+        <div style={loading ? {} : backgroundStyle}>
+            {loading ? <div className='w-full flex justify-center bg-black/70 h-screen items-center'> <Circles
+                        height="80"
+                        width="80"
+                        color="#be123c"
+                        ariaLabel="circles-loading"
+                        wrapperStyle={{}}
+                        wrapperClass=""
+                        visible={true}
+                        /> </div> : movie && <div className=" py-4 container max-w-[90%] min-w-[80%] md:max-w-[70%] lg:min-w-[45%] lg:max-w-[45%] mx-auto flex flex-col justify-center items-center w-full h-screen">
                 <div className="img-container flex justify-center w-full items-center bg-black rounded-t-3xl overflow-hidden h-[50%] relative">
                     <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt="" className='object-cover w-full opacity-50 hover:scale-105 transition duration-300'/>
                     <FaPlayCircle className='text-white top-48 drop-shadow-2xl hover:text-rose-700 transition-all duration-300 text-5xl absolute'/>

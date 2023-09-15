@@ -5,21 +5,31 @@ import { FaCirclePlay } from "react-icons/fa6";
 import imdbLogo from './../assets/imdb-logo.svg';
 import fruit from './../assets/fruit.png';
 import {GoSearch} from "react-icons/go";
+import { Circles } from  'react-loader-spinner'
 
 const Header = ({movlist}) => {
     const arrayLength = movlist.length;
     const [navbar, setNavbar] = useState(false);
     const [hideSearch, setHideSearch] = useState('translate-y-[-300px]');
     const [randomNumber, setRandomNumber] = useState(generateRandomNumber());
+    const [loading, setLoading] = useState(false);
     
 
     useEffect(() => {
+        
+        // setLoading(true);
+        if (movlist === true) {
+            setLoading(false); 
+        } else {
+            setLoading(true);
+        }
         const timer = setInterval(() => {
             setRandomNumber(generateRandomNumber());
+            // setLoading(false);
         }, 30000); // Update the random number every 30 seconds
 
             return () => clearInterval(timer); // Cleanup the interval on component unmount
-        }, []); // Empty dependency array ensures it only runs once on component mount
+        }, [loading]); // Empty dependency array ensures it only runs once on component mount
 
         function generateRandomNumber() {
             return Math.floor(Math.random() * arrayLength); // Change this as needed
@@ -48,8 +58,10 @@ const Header = ({movlist}) => {
 
     window.addEventListener('scroll', changeBackground);
 
+    
+
     return (
-        <header  style={backgroundStyle} className='transition-all duration-300 headerN text-white w-full min-h-screen relative flex items-center'>
+        <header  style={!loading ? {} : backgroundStyle} className='transition-all duration-300 headerN text-white w-full min-h-screen relative flex items-center'>
             <nav className={`w-full z-50 transition duration-300 top-0 py-5 ${navbar ? 'bg-rose-950/60 backdrop-blur-sm' : 'bg-transparent'} fixed px-6 lg:px-16 xl:px-28 border-gray-200 flex items-center justify-between`}>
                 <a href="#" className='flex gap-5 items-center'>
                     <img src={logo} alt="" className="navbar-brand" />
@@ -73,6 +85,15 @@ const Header = ({movlist}) => {
                 </div>
             </nav>
             
+            {!loading ? <div className='w-full flex justify-center'> <Circles
+                        height="80"
+                        width="80"
+                        color="#be123c"
+                        ariaLabel="circles-loading"
+                        wrapperStyle={{}}
+                        wrapperClass=""
+                        visible={true}
+                        /> </div>:
             <div className="conatainer flex flex-col items-start gap-5 md:w-[75%] lg:w-[50%] px-6 lg:px-16 xl:px-28">
                 <div>
                     <h2 className='transition-all hover:duration-300 duration-300 capitalize text-3xl md:text-6xl font-semibold text-white w-[100%]'>{randomMovie.title}</h2>
@@ -92,7 +113,7 @@ const Header = ({movlist}) => {
                     <FaCirclePlay />
                     WATCH TRAILER
                 </button>
-            </div>
+            </div>}
             
         </header>
     )

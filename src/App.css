@@ -4,7 +4,6 @@ body{
 }
 
 .headerN{
-    background: linear-gradient(#00000080,#00000080), url('assets/poster-img.png');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;

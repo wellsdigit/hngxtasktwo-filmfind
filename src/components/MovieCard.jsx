@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 
 const MovieCard = ({movies}) => {
     const [favorite, setFavorite] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const handleFavorite = (id) => {
         if (id === id){

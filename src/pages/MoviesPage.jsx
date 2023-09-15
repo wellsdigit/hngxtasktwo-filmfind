@@ -3,21 +3,25 @@ import Header from '../components/Header';
 import Movies from '../components/Movies';
 import axios from "axios";
 import { useState, useEffect} from 'react'
+import { Circles } from  'react-loader-spinner'
 
 const API_URL = 'https://api.themoviedb.org/3/discover/movie';
 const API_KEY = '08004a5babd38a393e515f06876a45d6';
 
 const Moviespage = () => {
     const [movielist, setMovielist] = useState(null);
+    const [loading, setLoading] = useState(false);
 
 
     const fetchMovieDetails = async () => {
+        setLoading(true);
         try {
           const response = await axios.get(
             `${API_URL}?api_key=${API_KEY}`
           );
   
           setMovielist(response.data.results);
+          setLoading(false);
         //   console.log(response.data.results)
         } catch (error) {
           console.error('Error fetching data:', error);
@@ -30,9 +34,17 @@ const Moviespage = () => {
 
     return(
         <>
-            {movielist && <Header movlist={movielist}/>}
+            {loading ? <div className='w-full flex justify-center bg-black/70 h-screen items-center'> <Circles
+                        height="80"
+                        width="80"
+                        color="#be123c"
+                        ariaLabel="circles-loading"
+                        wrapperStyle={{}}
+                        wrapperClass=""
+                        visible={true}
+                        /> </div> : movielist && <Header movlist={movielist}/>}
             {movielist && <Movies movieList={movielist}/>}
-            <Footer />
+            {loading? '' :<Footer />}
         </>
     )
 }

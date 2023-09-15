@@ -60,9 +60,9 @@ const MovieDetailPage = () => {
                     <div className='flex md:flex-row flex-col justify-between'>
                         <h2 data-testid="movie-title" className='capitalize text-2xl font-bold md:w-[60%] text-rose-700'>{movie.title}</h2>
                         <div className='md:text-right text-sm md:text-base flex flex-col gap-1 font-semibold text-gray-600'>
-                            <span data-testid="movie-release-date">{`USA, ${new Date(movie.release_date).toUTCString().split(" ")
+                            <span data-testid="movie-release-date">{`${new Date(movie.release_date).toUTCString().split(" ")
                             .slice(1, 4)
-                            .join(" ")} UTC+00:00`}</span>
+                            .join(" ")}`}</span>
                             <p data-testid="movie-runtime">{movie.runtime} minutes</p>
                         </div>
                     </div>

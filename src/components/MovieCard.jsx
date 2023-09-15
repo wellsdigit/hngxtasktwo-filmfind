@@ -35,9 +35,9 @@ const MovieCard = ({movies}) => {
                         <img className='w-full hover:scale-105 hover:opacity-70 hover:drop-shadow-xl transition duration-300' src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt="" data-testid="movie-poster"/>
                     </div>
                     <div className='w-full flex flex-col gap-1 mt-2'>
-                        <p className='text-gray-500 text-sm font-semibold' data-testid="movie-release-date">{`USA, ${new Date(movie.release_date).toUTCString().split(" ")
+                        <p className='text-gray-500 text-sm font-semibold' data-testid="movie-release-date">{`${new Date(movie.release_date).toUTCString().split(" ")
                         .slice(1, 4)
-                        .join(" ")} UTC+00:00`}</p>
+                        .join(" ")}`}</p>
                         <h3 className='capitalize text-lg font-semibold' data-testid="movie-title">{movie.title}</h3>
                         <div className='flex gap-4 pe-1 items-center w-full'>
                             <img src={imdbLogo} alt="..." />

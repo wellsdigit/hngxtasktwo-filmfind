@@ -5,8 +5,9 @@ import axios from "axios";
 import { useState, useEffect} from 'react'
 import { Circles } from  'react-loader-spinner'
 
-const API_URL = 'https://api.themoviedb.org/3/discover/movie';
+const API_URL = 'https://api.themoviedb.org/3/movie/top_rated';
 const API_KEY = '08004a5babd38a393e515f06876a45d6';
+const SEARCH_API_URL = 'https://api.themoviedb.org/3/search/movie?api_key={Key}&query={the+avengers}'
 
 const Moviespage = () => {
     const [movielist, setMovielist] = useState(null);
